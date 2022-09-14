@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import Navbar from "./components/Navbar";
 import News from './components/News';
+import { BrowserRouter as Router,Routes,Route} from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar'
+
 
 function App() {
   const [mode, setMode] = useState('light')
+  const [progress, setProgress] = useState(0)
+
+  const setprogress = (progress) => {
+    setProgress(progress)
+  }
+
   const toggleMode = ()=> {
     if (mode === 'light') {
       setMode('dark')
@@ -23,11 +32,25 @@ function App() {
       document.body.style.color = '#000';
     }
   }
+
   return (
-    <>
+    <Router>
       <Navbar search={false} toggleMode={toggleMode} mode={mode}/>
-      <News/>
-    </>
+      <LoadingBar
+        color='#f11946'
+        height={3}
+        progress={progress}
+      />
+      <Routes>
+        <Route path="/" element={<News progress={setprogress} key="general" category="general" />} />
+        <Route path="/business" element={<News progress={setprogress} key="business" category="business" />} />
+        <Route path="/entertainment" element={<News progress={setprogress} key="entertainment" category="entertainment" />} />
+        <Route path="/health" element={<News progress={setprogress} key="health" category="health" />} />
+        <Route path="/science" element={<News progress={setprogress} key="science" category="science" />} />
+        <Route path="/sports" element={<News progress={setprogress} key="sports" category="sports" />} />
+        <Route path="/technology" element={<News progress={setprogress} key="technology" category="technology" />} />
+      </Routes>
+    </Router>
   );
 }
 
