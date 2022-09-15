@@ -11,7 +11,7 @@ export default function News(props) {
    
     const loadNews = async() => {
         props.progress(30)
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=fd76533610124902a867cd522c2ff6ae&category=${props.category}&page=${page}`
+        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${props.apiKey}&category=${props.category}&page=${page}`
         props.progress(50)
         let data = await fetch(url)
         props.progress(70)
@@ -24,7 +24,7 @@ export default function News(props) {
 
     const fetchMoreData = async () => {
         setPage(page+1)
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=fd76533610124902a867cd522c2ff6ae&category=${props.category}&page=${page+1}`
+        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${props.apiKey}&category=${props.category}&page=${page+1}`
         let data = await fetch(url)
         let parseData = await data.json()
         setArticles(articles.concat(parseData['articles']))
@@ -49,7 +49,7 @@ export default function News(props) {
         >
         <div className='row mx-2'>
             {articles.map((elem) => {
-                return <div style={{position:"relative"}} className='col-md-4' key={elem.url}><Newsitem source={elem.source.name} author={elem.author ? elem.author : 'Unknown'} publishedAt={elem.publishedAt} title={elem.title} newsUrl={elem.url} description={elem.description} imageUrl={elem.urlToImage}/></div>
+                return <div style={{position:"relative"}} className='col-md-4' key={elem.url}><Newsitem mode={props.mode} source={elem.source.name} author={elem.author ? elem.author : 'Unknown'} publishedAt={elem.publishedAt} title={elem.title} newsUrl={elem.url} description={elem.description} imageUrl={elem.urlToImage}/></div>
             })}
         </div>
         </InfiniteScroll>

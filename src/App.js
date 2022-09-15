@@ -6,6 +6,7 @@ import LoadingBar from 'react-top-loading-bar'
 
 
 function App() {
+  const apiKey = process.env.REACT_APP_NEWS_API_KEY
   const [mode, setMode] = useState('light')
   const [progress, setProgress] = useState(0)
 
@@ -42,13 +43,13 @@ function App() {
         progress={progress}
       />
       <Routes>
-        <Route path="/" element={<News progress={setprogress} key="general" category="general" />} />
-        <Route path="/business" element={<News progress={setprogress} key="business" category="business" />} />
-        <Route path="/entertainment" element={<News progress={setprogress} key="entertainment" category="entertainment" />} />
-        <Route path="/health" element={<News progress={setprogress} key="health" category="health" />} />
-        <Route path="/science" element={<News progress={setprogress} key="science" category="science" />} />
-        <Route path="/sports" element={<News progress={setprogress} key="sports" category="sports" />} />
-        <Route path="/technology" element={<News progress={setprogress} key="technology" category="technology" />} />
+        <Route path="/" element={<News mode={mode} apiKey={apiKey} progress={setprogress} key="general" category="general" />} />
+        <Route path="/business" element={<News mode={mode} apiKey={apiKey} progress={setprogress} key="business" category="business" />} />
+        <Route path="/entertainment" element={<News mode={mode} apiKey={apiKey} progress={setprogress} key="entertainment" category="entertainment" />} />
+        <Route path="/health" element={<News mode={mode} apiKey={apiKey} progress={setprogress} key="health" category="health" />} />
+        <Route path="/science" element={<News mode={mode} apiKey={apiKey} progress={setprogress} key="science" category="science" />} />
+        <Route path="/sports" element={<News mode={mode} apiKey={apiKey} progress={setprogress} key="sports" category="sports" />} />
+        <Route path="/technology" element={<News mode={mode} apiKey={apiKey} progress={setprogress} key="technology" category="technology" />} />
       </Routes>
     </Router>
   );

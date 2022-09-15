@@ -1,10 +1,11 @@
 import React from 'react'
 
 export default function Newsitem(props) {
+    const bgColor = (props.mode === 'dark' ? '#001634' : '#fff') 
     return (
         <>
         <span className="badge bg-danger" style={{position:"absolute",right:"13px",top:"16px",zIndex:1}}>{props.source}</span>
-        <div className="card my-3">
+        <div className="card my-3" style={{backgroundColor : bgColor}}>
             <img src={props.imageUrl} className="card-img-top" alt="..."/>
             <div className="card-body">
                 <h5 className="card-title">{props.title}</h5>
